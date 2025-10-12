@@ -18,8 +18,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm install
-      - run: npm test
+      - run: npm ci
+      - run: npx jest
       - run: npm run build
 
   scan:
@@ -31,4 +31,9 @@ jobs:
           fetch-depth: 0  # Ensures full commit history for Gitleaks
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: true
+        with:
+          args: detect --source . --report-path gitleaks-report.json --report-format json
         
