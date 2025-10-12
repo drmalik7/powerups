@@ -1,6 +1,7 @@
 let express = require('express');
 let path = require('path');
 let fs = require('fs');
+const { env } = require('process');
 let app = express();
 
 
@@ -23,4 +24,3 @@ app.get('/profile-picture-ari', function (req, res) {
 app.listen(3000, function () {
   console.log("app listening on port 3000!");
 });
-
